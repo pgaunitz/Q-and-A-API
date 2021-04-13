@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: %i[create index] #handle signup, query users
+      post '/login', to: 'auth#login' #handles login for existing users
+      get '/auto_login', to: 'auth#auto_login' #handles auto login when user revisit the app
+    end
+  end
 end
